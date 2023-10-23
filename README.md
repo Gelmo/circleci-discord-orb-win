@@ -1,6 +1,6 @@
-# circleci-discord-orb
-A CircleCI orb for sending notifications and messages to Discord. For more
-information about how orbs work, see this
+# circleci-discord-orb-win
+A CircleCI orb for sending notifications and messages to Discord. This version works on Windows executors
+For more information about how orbs work, see this
 [introduction](https://circleci.com/docs/2.0/orb-intro/).
 
 ## usage

@@ -3,9 +3,9 @@
 version: 2.1
 
 description: |
-   Create and send custom notifications and messages to Discord for CircleCI job statuses. This orb uses the certified slack orb as a base with commands changed for usage in Discord. View the orb's source: https://github.com/antonioned/circleci-discord-orb 
+   Create and send custom notifications and messages to Discord for CircleCI job statuses. This orb uses the certified slack orb as a base with commands changed for usage in Discord. View the orb's source: https://github.com/Gelmo/circleci-discord-orb-win
 display:
-  source_url: https://github.com/antonioned/circleci-discord-orb
+  source_url: https://github.com/Gelmo/circleci-discord-orb-win
 
 commands:
   status:
@@ -56,11 +56,6 @@ commands:
 
     steps:
       - run:
-          name: Provide error if curl is not installed.
-          command: |
-            which curl > curl_exists; echo $? | grep -q '1' && echo curl not installed && rm curl_exists && exit 1
-            rm curl_exists
-      - run:
           name: Discord - Setting Failure Condition
           command: |
             echo 'export DISCORD_BUILD_STATUS="fail"' >> $BASH_ENV
@@ -73,15 +68,8 @@ commands:
           when: on_success
 
       - run:
-          name: Provide error if non-bash shell
-          command: |
-            if [ ! -x /bin/bash ]; then
-              echo Bash not installed.
-              exit 1
-            fi
-      - run:
           name: Discord - Sending Status Alert
-          shell: /bin/bash
+          shell: bash.exe
           when: always
           command: |
             current_branch_in_filter=false
@@ -219,13 +207,6 @@ commands:
 
     steps:
       - run:
-          name: Provide error if non-bash shell
-          command: |
-            if [ ! -x /bin/bash ]; then
-              echo Bash not installed.
-              exit 1
-            fi
-      - run:
           name: Discord - Sending Approval Notification
           command: |
             # Provide error if no webhook is set and error. Otherwise continue
@@ -275,7 +256,7 @@ commands:
                 }" << parameters.webhook >>
               echo "Awaiting approval notified."
             fi
-          shell: /bin/bash
+          shell: bash.exe
 
 example:
   status:
@@ -283,7 +264,7 @@ example:
     usage:
       version: 2.1
       orbs:
-        discord: antonioned/discord@0.1.0
+        discord: gelmo/discord-win@0.0.2
       jobs:
         tests:
           steps:
@@ -293,7 +274,7 @@ example:
     usage:
       version: 2.1
       orbs:
-        discord: antonioned/discord@0.1.0
+        discord: gelmo/discord-win@0.0.2
       jobs:
         tests:
           steps:
